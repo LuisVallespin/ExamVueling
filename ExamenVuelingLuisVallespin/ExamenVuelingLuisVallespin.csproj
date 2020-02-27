@@ -187,8 +187,8 @@
     <Compile Include="Services\Factory\ITransactionFactory.cs" />
     <Compile Include="Services\Factory\RateFactory.cs" />
     <Compile Include="Services\Factory\TransactionFactory.cs" />
-    <Compile Include="Services\Log\ILog.cs" />
-    <Compile Include="Services\Log\Log.cs" />
+    <Compile Include="Services\Logger\ILog.cs" />
+    <Compile Include="Services\Logger\Log.cs" />
     <Compile Include="Services\Mapper\IRateMapper.cs" />
     <Compile Include="Services\Mapper\ITransactionMapper.cs" />
     <Compile Include="Services\Mapper\RateMapper.cs" />
@@ -267,6 +267,7 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Services\Log\" />
     <Folder Include="Views\RateController\" />
     <Folder Include="Views\Rate\" />
     <Folder Include="Views\Transaction\" />

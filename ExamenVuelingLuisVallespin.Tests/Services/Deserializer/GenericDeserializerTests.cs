@@ -1,12 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ExamenVuelingLuisVallespin.Services.Deserializer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ExamenVuelingLuisVallespin.Services.Deserializer;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExamenVuelingLuisVallespin.Services.Deserializer.Tests
+namespace ExamenVuelingLuisVallespin.Tests.Services.Deserializer
 {
     [TestClass()]
     public class GenericDeserializerTests
