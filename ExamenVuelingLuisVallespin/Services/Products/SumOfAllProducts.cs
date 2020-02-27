@@ -41,17 +41,21 @@ namespace ExamenVuelingLuisVallespin.Services.Products
                     var amount = 0m;
                     foreach (var transaction in product)
                     {
-
                         switch (transaction.Currency)
                         {
                             case "EUR":
                                 amount = transaction.Amount;
                                 break;
-                            default:
+                            case "USD":
                                 amount = await _converter.Convert(transaction.Amount, transaction.Currency, "EUR");
                                 break;
+                            case "AUD":
+                                amount = await _converter.Convert(transaction.Amount, transaction.Currency, "EUR");
+                                break;
+                            default:
+                                amount = 0;
+                                break;
                         }
-
                         totalAmount += amount;
                     }
 

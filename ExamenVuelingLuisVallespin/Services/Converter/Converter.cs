@@ -24,11 +24,8 @@ namespace ExamenVuelingLuisVallespin.Services.Converter
         public async Task<decimal> Convert(decimal amount, string from, string to)
         {
             var listRates = await _repository.GetAll();
-            var rate = listRates
-                .Where(item => item.From == from)
-                .Where(item => item.To == to)
-                .First();
-            return amount * rate.RateValue;
+            var rate = listRates.Where(item => item.From == from && item.To == to);
+            return amount * rate.First().RateValue;
         }
     }
 }
