@@ -8,7 +8,7 @@ namespace ExamenVuelingLuisVallespin.Services.Repository
 {
     public class FakeRateRepository : IGenericRepository<Rate>
     {
-        private readonly List<Rate> rateList = new List<Rate>()
+        private List<Rate> rateList = new List<Rate>()
         {
             new Rate() { From = "EUR", To = "AUS", RateValue = 0.95M},
             new Rate() { From = "CAD", To = "EUR", RateValue = 23.54M},
@@ -17,42 +17,50 @@ namespace ExamenVuelingLuisVallespin.Services.Repository
         };
 
 
-        public Task<IEnumerable<Rate>> GetAll()
+        public async Task<IEnumerable<Rate>> GetAll()
         {
-            throw new NotImplementedException();
+            return rateList;
         }
 
-        public Task<Rate> GetById(object id)
+        public async Task<Rate> GetById(object id)
         {
-            throw new NotImplementedException();
+            return rateList[(int)id];
         }
 
-        public Task Add(Rate entity)
+        public async Task Add(Rate entity)
         {
-            throw new NotImplementedException();
+            rateList.Add(entity);
         }
 
-        public Task AddAll(IEnumerable<Rate> entityList)
+        public async Task AddAll(IEnumerable<Rate> entityList)
         {
-            throw new NotImplementedException();
+            foreach (var item in entityList)
+            {
+                rateList.Add(item);
+            }
         }
 
-        public Task Update(Rate entity)
+        public async Task Update(Rate entity)
         {
-            throw new NotImplementedException();
+            Rate rate = rateList.Find(item => item.Id == entity.Id);
+            if (rate != null)
+            {
+                rate = entity;
+            }
+            await Save().ConfigureAwait(false);
         }
 
-        public Task Delete(object id)
+        public async Task Delete(object id)
         {
-            throw new NotImplementedException();
+            rateList.RemoveAt((int)id);
         }
 
-        public Task Empty()
+        public async Task Empty()
         {
-            throw new NotImplementedException();
+            rateList = new List<Rate>();
         }
 
-        public Task Save()
+        public async Task Save()
         {
             throw new NotImplementedException();
         }

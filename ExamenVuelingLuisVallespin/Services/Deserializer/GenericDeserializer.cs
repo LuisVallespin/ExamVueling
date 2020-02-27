@@ -22,7 +22,6 @@ namespace ExamenVuelingLuisVallespin.Services.Deserializer
                 }
                 catch (System.Exception ex)
                 {
-                    //TODO: Excepcion Custom
                     throw new DeserializerException("Problema al deserializar", ex);
                 }
             }

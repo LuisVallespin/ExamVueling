@@ -30,7 +30,7 @@ namespace ExamenVuelingLuisVallespin.Services.Mapper
             }
             catch (System.Exception ex)
             {
-                throw new TransactionMapperException("Problema al Mapear un elemento", ex);
+                throw new TransactionMapperException("Problema al Mapear un elemento Transaction", ex);
             }
         }
 
@@ -48,7 +48,7 @@ namespace ExamenVuelingLuisVallespin.Services.Mapper
             }
             catch (System.Exception ex)
             {
-                throw new TransactionMapperException("Problema al Mapear una lista", ex);
+                throw new TransactionMapperException("Problema al Mapear una lista de Transaction", ex);
             }
         }
     }

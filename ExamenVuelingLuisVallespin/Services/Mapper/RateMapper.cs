@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using ExamenVuelingLuisVallespin.Models;
+using ExamenVuelingLuisVallespin.Services.Exception;
 using ExamenVuelingLuisVallespin.Services.Factory;
 
 namespace ExamenVuelingLuisVallespin.Services.Mapper
@@ -28,9 +29,9 @@ namespace ExamenVuelingLuisVallespin.Services.Mapper
             {
                 return await _rateFactory.CreateInstance(rateJson);
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
-                throw new NotImplementedException();
+                throw new RateMapperException("Error al mapear un Rate", ex);
             }
         }
 
@@ -46,9 +47,9 @@ namespace ExamenVuelingLuisVallespin.Services.Mapper
 
                 return ratesList;
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
-                throw new NotImplementedException();
+                throw new RateMapperException("Error al mapear una lista de Rates", ex);
             }
         }
     }

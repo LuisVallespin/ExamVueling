@@ -9,7 +9,7 @@ namespace ExamenVuelingLuisVallespin.Services.Repository
 {
     public class FakeTransactionRepository : ITransactionRepository
     {
-        private readonly List<Transaction> transactionList = new List<Transaction>()
+        private List<Transaction> transactionList = new List<Transaction>()
         {
             new Transaction() { Sku = "123SA", Amount = 10.2M, Currency = "EUR"},
             new Transaction() { Sku = "Q5SDF8", Amount = 4.2M, Currency = "USD"},
@@ -57,10 +57,7 @@ namespace ExamenVuelingLuisVallespin.Services.Repository
 
         public async Task Empty()
         {
-            foreach (var item in transactionList)
-            {
-                transactionList.Remove(item);
-            }
+            transactionList = new List<Transaction>();
         }
 
         public async Task Save()

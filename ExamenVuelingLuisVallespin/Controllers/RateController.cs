@@ -20,15 +20,12 @@ namespace ExamenVuelingLuisVallespin.Controllers
         private readonly IGenericDeserializer<RateJson.Class1> _deserializer;
         private readonly IRateMapper _mapper;
 
-
         private readonly string _url = @"http://quiet-stone-2094.herokuapp.com/rates.json";
-
 
         public RateController()
         {
 
         }
-
         public RateController(IGenericRepository<Rate> repository, IUrlChecker urlChecker,
             IGenericDeserializer<RateJson.Class1> deserializer, IRateMapper mapper)
         {

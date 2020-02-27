@@ -26,10 +26,6 @@ namespace ExamenVuelingLuisVallespin.Controllers
         {
 
         }
-        /*
-         * IGenericRepository<Rate> repository, IUrlChecker urlChecker,
-            IGenericDeserializer<RateJson.Class1> deserializer, IRateMapper mapper
-         */
         public TransactionController(ITransactionRepository repository, IUrlChecker urlChecker,
             IGenericDeserializer<TransactionJson.Class1> deserializer, ITransactionMapper mapper)
         {

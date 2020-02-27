@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using ExamenVuelingLuisVallespin.Services.Exception;
 
 namespace ExamenVuelingLuisVallespin.Services.Logger
 {
@@ -16,9 +17,9 @@ namespace ExamenVuelingLuisVallespin.Services.Logger
                     await writer.WriteLineAsync(message);
                 }
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
-                throw new System.Exception();
+                throw new LogException("Error al escribir en el log", ex);
             }
             
         }

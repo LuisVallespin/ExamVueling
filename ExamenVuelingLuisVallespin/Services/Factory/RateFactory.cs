@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.WebPages;
 using ExamenVuelingLuisVallespin.Models;
+using ExamenVuelingLuisVallespin.Services.Exception;
 
 namespace ExamenVuelingLuisVallespin.Services.Factory
 {
@@ -12,12 +13,20 @@ namespace ExamenVuelingLuisVallespin.Services.Factory
     {
         public async Task<Rate> CreateInstance(RateJson.Class1 rate)
         {
-            return await Task.Run(() => new Rate()
+            try
             {
-                From = rate.from,
-                To = rate.to,
-                RateValue = Convert.ToDecimal(rate.rate) 
-            });
+                return await Task.Run(() => new Rate()
+                {
+                    From = rate.from,
+                    To = rate.to,
+                    RateValue = Convert.ToDecimal(rate.rate)
+                });
+            }
+            catch (System.Exception ex)
+            {
+                throw new RateFactoryException("Hubo un problema al crear un objeto Rate", ex);
+            }
+            
         }
     }
 }

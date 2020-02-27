@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using ExamenVuelingLuisVallespin.Services.Exception;
 using Polly;
 
 namespace ExamenVuelingLuisVallespin.Services.UrlChecker
@@ -12,16 +13,20 @@ namespace ExamenVuelingLuisVallespin.Services.UrlChecker
     {
         public async Task<bool> Check(string url)
         {
-            var httpClient = new HttpClient();
-            var request = await Policy
-                .HandleResult<HttpResponseMessage>(message => !message.IsSuccessStatusCode)
-                .WaitAndRetryAsync(3, i => TimeSpan.FromSeconds(2), (result, timeSpan, retryCount, context) =>
-                {
-                    Console.WriteLine("Escribir en Log");
-                    
-                })
-                .ExecuteAsync(() => httpClient.GetAsync(url));
-            return request.IsSuccessStatusCode;
+            try
+            {
+                var httpClient = new HttpClient();
+                var request = await Policy
+                    .HandleResult<HttpResponseMessage>(message => !message.IsSuccessStatusCode)
+                    .WaitAndRetryAsync(3, i => TimeSpan.FromSeconds(2),
+                        (result, timeSpan, retryCount, context) => { Console.WriteLine("Escribir en Log"); })
+                    .ExecuteAsync(() => httpClient.GetAsync(url));
+                return request.IsSuccessStatusCode;
+            }
+            catch (System.Exception ex)
+            {
+                throw new UrlCheckerException("Error al intentar comprobar la url", ex);
+            }
         }
     }
 }
