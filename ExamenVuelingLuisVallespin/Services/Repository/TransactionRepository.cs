@@ -44,8 +44,9 @@ namespace ExamenVuelingLuisVallespin.Services.Repository
             foreach (var item in entityList)
             {
                 _table.Add(item);
-                await Save().ConfigureAwait(false);
             }
+
+            await Save().ConfigureAwait(false);
         }
 
         public async Task Update(Transaction entity)
