@@ -11,6 +11,7 @@ using ExamenVuelingLuisVallespin.Models;
 using ExamenVuelingLuisVallespin.Services.Deserializer;
 using ExamenVuelingLuisVallespin.Services.Factory;
 using ExamenVuelingLuisVallespin.Services.Mapper;
+using ExamenVuelingLuisVallespin.Services.Products;
 using ExamenVuelingLuisVallespin.Services.Repository;
 using ExamenVuelingLuisVallespin.Services.UrlChecker;
 
@@ -36,6 +37,7 @@ namespace ExamenVuelingLuisVallespin
             builder.RegisterType<RateFactory>().As<IRateFactory>();
             builder.RegisterType<TransactionFactory>().As<ITransactionFactory>();
             builder.RegisterType<GenericDeserializer<TransactionJson.Class1>>().As<IGenericDeserializer<TransactionJson.Class1>>();
+            builder.RegisterType<SumOfAllProducts>().As<ISumOfAllProducts>();
             builder.RegisterType<TransactionMapper>().As<ITransactionMapper>();
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

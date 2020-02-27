@@ -45,7 +45,6 @@ namespace ExamenVuelingLuisVallespin.Services.Repository
             {
                 _table.Add(item);
             }
-
             await Save().ConfigureAwait(false);
         }
 

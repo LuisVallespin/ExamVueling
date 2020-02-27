@@ -8,6 +8,7 @@ using ExamenVuelingLuisVallespin.Models;
 using ExamenVuelingLuisVallespin.Services.Deserializer;
 using ExamenVuelingLuisVallespin.Services.Factory;
 using ExamenVuelingLuisVallespin.Services.Mapper;
+using ExamenVuelingLuisVallespin.Services.Products;
 using ExamenVuelingLuisVallespin.Services.Repository;
 using ExamenVuelingLuisVallespin.Services.UrlChecker;
 using Newtonsoft.Json;
@@ -21,6 +22,7 @@ namespace ExamenVuelingLuisVallespin.Controllers
         private readonly IGenericDeserializer<TransactionJson.Class1> _deserializer;
         private readonly ITransactionMapper _mapper;
         private readonly ITransactionFactory _factory;
+        private readonly ISumOfAllProducts _sumOfAll;
 
         private readonly string _url = @"http://quiet-stone-2094.herokuapp.com/transactions.json";
 
@@ -30,13 +32,14 @@ namespace ExamenVuelingLuisVallespin.Controllers
         }
         public TransactionController(ITransactionRepository repository, IUrlChecker urlChecker,
             IGenericDeserializer<TransactionJson.Class1> deserializer, ITransactionMapper mapper,
-            ITransactionFactory factory)
+            ITransactionFactory factory, ISumOfAllProducts sumOfAll)
         {
             _repository = repository;
             _urlChecker = urlChecker;
             _deserializer = deserializer;
             _mapper = mapper;
             _factory = factory;
+            _sumOfAll = sumOfAll;
         }
 
         // GET: Transaction
@@ -56,6 +59,13 @@ namespace ExamenVuelingLuisVallespin.Controllers
             }
 
             return JsonConvert.SerializeObject(transactionList);
+        }
+
+        public async Task<string> GetAllWithSum()
+        {
+            var allWithSum = await _sumOfAll.Get();
+            return JsonConvert.SerializeObject(allWithSum);
+
         }
         
     }
