@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using ExamenVuelingLuisVallespin.Models;
 using ExamenVuelingLuisVallespin.Services.Deserializer;
+using ExamenVuelingLuisVallespin.Services.Factory;
 using ExamenVuelingLuisVallespin.Services.Mapper;
 using ExamenVuelingLuisVallespin.Services.Repository;
 using ExamenVuelingLuisVallespin.Services.UrlChecker;
@@ -19,6 +20,7 @@ namespace ExamenVuelingLuisVallespin.Controllers
         private readonly IUrlChecker _urlChecker;
         private readonly IGenericDeserializer<TransactionJson.Class1> _deserializer;
         private readonly ITransactionMapper _mapper;
+        private readonly ITransactionFactory _factory;
 
         private readonly string _url = @"http://quiet-stone-2094.herokuapp.com/transactions.json";
 
@@ -27,12 +29,14 @@ namespace ExamenVuelingLuisVallespin.Controllers
 
         }
         public TransactionController(ITransactionRepository repository, IUrlChecker urlChecker,
-            IGenericDeserializer<TransactionJson.Class1> deserializer, ITransactionMapper mapper)
+            IGenericDeserializer<TransactionJson.Class1> deserializer, ITransactionMapper mapper,
+            ITransactionFactory factory)
         {
             _repository = repository;
             _urlChecker = urlChecker;
             _deserializer = deserializer;
             _mapper = mapper;
+            _factory = factory;
         }
 
         // GET: Transaction

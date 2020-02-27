@@ -34,6 +34,7 @@ namespace ExamenVuelingLuisVallespin
             builder.RegisterType<GenericDeserializer<RateJson.Class1>>().As<IGenericDeserializer<RateJson.Class1>>();
             builder.RegisterType<RateMapper>().As<IRateMapper>();
             builder.RegisterType<RateFactory>().As<IRateFactory>();
+            builder.RegisterType<TransactionFactory>().As<ITransactionFactory>();
             builder.RegisterType<GenericDeserializer<TransactionJson.Class1>>().As<IGenericDeserializer<TransactionJson.Class1>>();
             builder.RegisterType<TransactionMapper>().As<ITransactionMapper>();
             var container = builder.Build();
