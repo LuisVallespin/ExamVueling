@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using ExamenVuelingLuisVallespin.Services.Converter;
 using ExamenVuelingLuisVallespin.Services.Exception;
 using ExamenVuelingLuisVallespin.Services.Mapper;
 using ExamenVuelingLuisVallespin.Services.Repository;
@@ -12,15 +13,17 @@ namespace ExamenVuelingLuisVallespin.Services.Products
     public class SumOfAllProducts : ISumOfAllProducts
     {
         private readonly ITransactionRepository _repository;
+        private readonly IConverter _converter;
 
         public SumOfAllProducts()
         {
 
         }
 
-        public SumOfAllProducts(ITransactionRepository repository)
+        public SumOfAllProducts(ITransactionRepository repository, IConverter converter)
         {
             _repository = repository;
+            _converter = converter;
         }
 
         public async Task<Dictionary<string, decimal>> Get()
@@ -34,13 +37,25 @@ namespace ExamenVuelingLuisVallespin.Services.Products
                 Dictionary<string, decimal> dictionary = new Dictionary<string, decimal>();
                 foreach (var product in allProducts)
                 {
-                    decimal amount = 0;
+                    var totalAmount = 0m;
+                    var amount = 0m;
                     foreach (var transaction in product)
                     {
-                        amount += transaction.Amount;
+
+                        switch (transaction.Currency)
+                        {
+                            case "EUR":
+                                amount = transaction.Amount;
+                                break;
+                            default:
+                                amount = await _converter.Convert(transaction.Amount, transaction.Currency, "EUR");
+                                break;
+                        }
+
+                        totalAmount += amount;
                     }
 
-                    dictionary.Add(product.Key, amount);
+                    dictionary.Add(product.Key, totalAmount);
                 }
 
                 return dictionary;

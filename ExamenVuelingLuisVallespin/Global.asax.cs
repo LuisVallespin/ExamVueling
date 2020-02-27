@@ -8,6 +8,7 @@ using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
 using ExamenVuelingLuisVallespin.Models;
+using ExamenVuelingLuisVallespin.Services.Converter;
 using ExamenVuelingLuisVallespin.Services.Deserializer;
 using ExamenVuelingLuisVallespin.Services.Factory;
 using ExamenVuelingLuisVallespin.Services.Mapper;
@@ -38,6 +39,7 @@ namespace ExamenVuelingLuisVallespin
             builder.RegisterType<TransactionFactory>().As<ITransactionFactory>();
             builder.RegisterType<GenericDeserializer<TransactionJson.Class1>>().As<IGenericDeserializer<TransactionJson.Class1>>();
             builder.RegisterType<SumOfAllProducts>().As<ISumOfAllProducts>();
+            builder.RegisterType<Converter>().As<IConverter>();
             builder.RegisterType<TransactionMapper>().As<ITransactionMapper>();
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
